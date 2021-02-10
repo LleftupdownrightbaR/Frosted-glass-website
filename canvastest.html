@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+      <title>canvasTest</title>
+      <script type="text/javascript">
+        function Draw(){
+          var canvas = document.getElementById('glassCanvas');
+          var context = canvas.getContext('2d');
+
+          var img = new Image();
+          img.src = 'glassTexture.png';
+          img.onload = function() {
+            var ptrn = context.createPattern(img, 'repeat');
+            context.fillStyle = ptrn;
+            context.fillRect(0, 0, 1000, 2000);
+          }
+        }
+        window.addEventListener('load', Draw, false);
+      </script>
+      <style>
+      @media (prefers-color-scheme: dark) {
+        :root {
+           --lightColor: rgba(35, 35, 35, .87);
+           --contentColor: rgba(0, 0, 0, 1);
+        }
+      }
+      :root {
+         --lightColor: rgba(220, 220, 220, .87);
+         --contentColor: rgba(255, 255, 255, 1);
+      }
+      body {
+        background: url(https://czbluesky.webnode.tw/_files/200000015-65a9e66a43/三角們%20with%20CzBlueSKY.png) 0 / cover fixed;
+        margin: ;
+      }
+      #container {
+        -webkit-backdrop-filter: blur(20px);
+        background-color: var(--lightColor);
+        border: 1px solid rgba(87, 187, 255, 1);
+        display: grid;
+        grid-template-columns: 320px auto;
+        grid-template-rows: auto;
+        grid-auto-flow: column;
+        grid-column-gap: 0px;
+        width: auto;  height: auto;
+      }
+      #glassCanvas {
+        opacity: .03;
+        width: 100%;  height: 100%;
+      }
+      #contentCanvas {
+        background-color: var(--contentColor);
+        width: 100%;  height: 100%;
+      }
+      </style>
+  </head>
+  <body>
+    <div id="container">
+      <canvas id="glassCanvas" width="320" height="720">Canvas支援必要。</canvas>
+      <canvas id="contentCanvas">Canvas支援必要。</canvas>
+    </div>
+  </body>
+</html>
