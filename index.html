@@ -13,51 +13,74 @@
           img.onload = function() {
             var ptrn = context.createPattern(img, 'repeat');
             context.fillStyle = ptrn;
-            context.fillRect(0, 0, 1000, 2000);
+            context.fillRect(0, 0, 768, 768);
           }
         }
         window.addEventListener('load', Draw, false);
       </script>
       <style>
-      @media (prefers-color-scheme: dark) {
-        :root {
-           --lightColor: rgba(35, 35, 35, .87);
-           --contentColor: rgba(0, 0, 0, 1);
-        }
-      }
-      :root {
-         --lightColor: rgba(220, 220, 220, .87);
-         --contentColor: rgba(255, 255, 255, 1);
+      * {
+        margin: 0;
+        padding: 0;
       }
       body {
         background: url(https://czbluesky.webnode.tw/_files/200000015-65a9e66a43/三角們%20with%20CzBlueSKY.png) 0 / cover fixed;
-        margin: ;
       }
-      #container {
-        -webkit-backdrop-filter: blur(20px);
-        background-color: var(--lightColor);
-        border: 1px solid rgba(87, 187, 255, 1);
+      #box, #container {
         display: grid;
-        grid-template-columns: 320px auto;
         grid-template-rows: auto;
         grid-auto-flow: column;
         grid-column-gap: 0px;
-        width: auto;  height: auto;
+      }
+      #box {
+        -webkit-backdrop-filter: blur(20px);
+        grid-template-columns: auto;
+        margin: 8px;
+        position: relative;
+        z-index: 1;
       }
       #glassCanvas {
-        opacity: .03;
+        opacity: var(--glassOpacity);
+        position: absolute;
+        z-index: 2;
+      }
+      #container {
+        background-color: var(--lightColor);
+        border: 1px solid rgba(87, 187, 255, 1);
+        grid-template-columns: 320px auto;
+        position: relative;
+        z-index: 3;
+        width: auto;  height: auto;
+      }
+      #glassCanvas, #naviCanvas, #contentCanvas {
         width: 100%;  height: 100%;
       }
       #contentCanvas {
         background-color: var(--contentColor);
-        width: 100%;  height: 100%;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+           --lightColor: rgba(35, 35, 35, .87);
+           --contentColor: rgba(0, 0, 0, 1);
+           --glassOpacity: .7;
+        }
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+           --lightColor: rgba(220, 220, 220, .87);
+           --contentColor: rgba(255, 255, 255, 1);
+           --glassOpacity: .7;
+        }
       }
       </style>
   </head>
   <body>
-    <div id="container">
-      <canvas id="glassCanvas" width="320" height="720">Canvas支援必要。</canvas>
-      <canvas id="contentCanvas">Canvas支援必要。</canvas>
+    <div id="box">
+      <canvas id="glassCanvas" width="768" height="768">Canvas支援必要。</canvas>
+      <div id="container">
+        <canvas id="naviCanvas" width="320" height="720">Canvas支援必要。</canvas>
+        <canvas id="contentCanvas">Canvas支援必要。</canvas>
+      </div>
     </div>
   </body>
 </html>
